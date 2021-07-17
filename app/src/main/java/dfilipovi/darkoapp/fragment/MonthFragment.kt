@@ -2,6 +2,7 @@ package dfilipovi.darkoapp.fragment
 
 import android.content.Intent
 import android.database.Cursor
+import android.graphics.Color
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.text.TextUtils
@@ -73,17 +74,21 @@ class MonthFragment : Fragment() {
 		if (activity != null && view != null) {
 			firstDay += offset
 			lastDay += offset
-			for (i in firstDay..lastDay) {
+			for (i in 1..42) {
 				val id: Int = resources.getIdentifier("calendar_day_%d".format(i), "id", activity!!.packageName)
 				val layout: LinearLayout = view!!.findViewById(id)
 
-				val date: String = "%02d.%02d.%04d.".format(i - offset, calendar[Calendar.MONTH] + 1, calendar[Calendar.YEAR])
-				mBufferDaysInMonth[date] = layout
+				if (i >= firstDay && i <= lastDay) {
+					val date: String = "%02d.%02d.%04d.".format(i - offset, calendar[Calendar.MONTH] + 1, calendar[Calendar.YEAR])
+					mBufferDaysInMonth[date] = layout
 
-				val tvDayOfTheMonth = TextView(activity)
-				tvDayOfTheMonth.text = (i - offset).toString()
-				tvDayOfTheMonth.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
-				layout.addView(tvDayOfTheMonth)
+					val tvDayOfTheMonth = TextView(activity)
+					tvDayOfTheMonth.text = (i - offset).toString()
+					tvDayOfTheMonth.textAlignment = TextView.TEXT_ALIGNMENT_CENTER
+					layout.addView(tvDayOfTheMonth)
+				} else {
+					layout.setBackgroundColor(Color.parseColor("#e5e5e5"))
+				}
 			}
 		}
 	}
