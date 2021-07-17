@@ -3,6 +3,7 @@ package dfilipovi.darkoapp
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.transition.TransitionInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -19,6 +20,7 @@ import java.util.*
 class MainActivity : AppCompatActivity() {
 
 	private val mCalendar: Calendar = Calendar.getInstance()
+	private var mCurrentMonthFragment: MonthFragment = MonthFragment.newInstance(mCalendar.clone() as Calendar)
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -71,10 +73,9 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun initializeMonthFragment(savedInstanceState: Bundle?) {
-		val monthFragment = MonthFragment.newInstance(mCalendar.clone() as Calendar)
 		if (savedInstanceState == null) {
 			supportFragmentManager.commit {
-				add(R.id.fragment_month, monthFragment)
+				add(R.id.fragment_month, mCurrentMonthFragment)
 			}
 		}
 	}
@@ -84,19 +85,34 @@ class MainActivity : AppCompatActivity() {
 		main.setOnTouchListener(object: OnSwipeListener(this) {
 			override fun onLeftSwipe() {
 				mCalendar.set(Calendar.MONTH, mCalendar[Calendar.MONTH] + 1)
+				val inflater = TransitionInflater.from(getContext())
+
+				mCurrentMonthFragment.exitTransition = inflater.inflateTransition(R.transition.slide_left)
+				mCurrentMonthFragment = MonthFragment.newInstance(mCalendar.clone() as Calendar)
+				mCurrentMonthFragment.enterTransition = inflater.inflateTransition(R.transition.slide_right)
+
 				initializeMonthNameAndYear()
 				supportFragmentManager.commit {
-					replace(R.id.fragment_month, MonthFragment.newInstance(mCalendar.clone() as Calendar))
+					replace(R.id.fragment_month, mCurrentMonthFragment)
 				}
 			}
 			override fun onRightSwipe() {
 				mCalendar.set(Calendar.MONTH, mCalendar[Calendar.MONTH] - 1)
+				val inflater = TransitionInflater.from(getContext())
+
+				mCurrentMonthFragment.exitTransition = inflater.inflateTransition(R.transition.slide_right)
+				mCurrentMonthFragment = MonthFragment.newInstance(mCalendar.clone() as Calendar)
+				mCurrentMonthFragment.enterTransition = inflater.inflateTransition(R.transition.slide_left)
+
 				initializeMonthNameAndYear()
 				supportFragmentManager.commit {
-					replace(R.id.fragment_month, MonthFragment.newInstance(mCalendar.clone() as Calendar))
+					replace(R.id.fragment_month, mCurrentMonthFragment)
 				}
 			}
-
 		})
+	}
+
+	private fun getContext(): Context {
+		return this;
 	}
 }
