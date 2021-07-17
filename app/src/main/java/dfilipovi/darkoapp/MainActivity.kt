@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
 				mCalendar.set(Calendar.MONTH, mCalendar[Calendar.MONTH] + 1)
 				val inflater = TransitionInflater.from(getContext())
 
-				mCurrentMonthFragment.exitTransition = inflater.inflateTransition(R.transition.slide_left)
+				mCurrentMonthFragment.exitTransition = inflater.inflateTransition(R.transition.fade)
 				mCurrentMonthFragment = MonthFragment.newInstance(mCalendar.clone() as Calendar)
 				mCurrentMonthFragment.enterTransition = inflater.inflateTransition(R.transition.slide_right)
 
@@ -100,7 +100,7 @@ class MainActivity : AppCompatActivity() {
 				mCalendar.set(Calendar.MONTH, mCalendar[Calendar.MONTH] - 1)
 				val inflater = TransitionInflater.from(getContext())
 
-				mCurrentMonthFragment.exitTransition = inflater.inflateTransition(R.transition.slide_right)
+				mCurrentMonthFragment.exitTransition = inflater.inflateTransition(R.transition.fade)
 				mCurrentMonthFragment = MonthFragment.newInstance(mCalendar.clone() as Calendar)
 				mCurrentMonthFragment.enterTransition = inflater.inflateTransition(R.transition.slide_left)
 
