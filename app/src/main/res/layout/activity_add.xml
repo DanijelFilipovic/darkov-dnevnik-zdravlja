@@ -150,6 +150,10 @@
                     android:hint="@string/label_kilometers_start"
                     android:id="@+id/input_kilometers_start"
             />
+            <TextView android:layout_width="wrap_content"
+                      android:layout_height="wrap_content"
+                      android:text=" — "
+            />
             <EditText
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
