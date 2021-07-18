@@ -15,6 +15,32 @@
             android:layout_marginEnd="15dp" android:layout_marginStart="15dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="15dp">
 
+        <!--Datum i vremena početka i završetka-->
+        <TextView
+                android:text="@string/label_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/label_date"
+        />
+        <TextView android:textSize="18sp"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:inputType="date"
+                  android:ems="10"
+                  android:hint="@string/label_date"
+                  android:id="@+id/show_date"
+                  android:clickable="true"
+                  android:focusable="false"
+                  android:cursorVisible="false"
+        />
+
+        <!--Odvajač-->
+        <View
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+        />
+
         <!--Lokacija-->
         <TextView
                 android:text="@string/label_location"
@@ -33,35 +59,12 @@
 
         <!--Odvajač-->
         <View
-                android:id="@+id/divider_1"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-        />
-
-        <!--Datum i vremena početka i završetka-->
-        <TextView
-                android:text="@string/label_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_date"
-        />
-        <TextView android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:hint="@string/label_date"
-                android:id="@+id/show_date"
-                android:clickable="true"
-                android:focusable="false"
-                android:cursorVisible="false"
-        />
-        <!--Odvajač-->
-        <View
                 android:id="@+id/divider_2"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
         />
+
+        <!--Vrijeme početka i završetka-->
         <TextView
                 android:text="@string/label_time"
                 android:layout_width="match_parent"
