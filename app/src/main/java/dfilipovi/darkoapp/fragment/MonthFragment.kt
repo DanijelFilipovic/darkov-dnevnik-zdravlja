@@ -74,13 +74,20 @@ class MonthFragment : Fragment() {
 		if (activity != null && view != null) {
 			firstDay += offset
 			lastDay += offset
+
+			val today = Calendar.getInstance()
+			val todayString = "%02d.%02d.%04d.".format(today[Calendar.DAY_OF_MONTH], today[Calendar.MONTH] + 1, today[Calendar.YEAR])
 			for (i in 1..42) {
 				val id: Int = resources.getIdentifier("calendar_day_%d".format(i), "id", activity!!.packageName)
 				val layout: LinearLayout = view!!.findViewById(id)
 
 				if (i >= firstDay && i <= lastDay) {
-					val date: String = "%02d.%02d.%04d.".format(i - offset, calendar[Calendar.MONTH] + 1, calendar[Calendar.YEAR])
-					mBufferDaysInMonth[date] = layout
+					val dateString: String = "%02d.%02d.%04d.".format(i - offset, calendar[Calendar.MONTH] + 1, calendar[Calendar.YEAR])
+					mBufferDaysInMonth[dateString] = layout
+
+					if (dateString == todayString) {
+						layout.setBackgroundResource(if (i%7 == 0) R.drawable.cell_top_today else R.drawable.cell_top_right_today)
+					}
 
 					val tvDayOfTheMonth = TextView(activity)
 					tvDayOfTheMonth.text = (i - offset).toString()
