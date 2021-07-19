@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/label_date"
         />
-        <TextView android:textSize="18sp"
+        <EditText android:textSize="18sp"
                   android:layout_width="match_parent"
                   android:layout_height="wrap_content"
                   android:inputType="date"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/label_location"
         />
-        <TextView android:textSize="18sp"
+        <EditText android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -76,7 +76,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
         >
-            <TextView android:textSize="18sp"
+            <EditText android:textSize="18sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -88,7 +88,7 @@
                     android:focusable="false"
                     android:cursorVisible="false"
             />
-            <TextView android:textSize="18sp"
+            <EditText android:textSize="18sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -116,7 +116,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/label_vehicle"
         />
-        <TextView android:textSize="18sp"
+        <EditText android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
         >
-            <TextView android:textSize="18sp"
+            <EditText android:textSize="18sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -157,7 +157,7 @@
                       android:layout_height="wrap_content"
                       android:text=" — "
             />
-            <TextView android:textSize="18sp"
+            <EditText android:textSize="18sp"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight=".5"
@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/label_work_type"
         />
-        <TextView android:textSize="18sp"
+        <EditText android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
@@ -205,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/label_work_order"
         />
-        <TextView android:textSize="18sp"
+        <EditText android:textSize="18sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
