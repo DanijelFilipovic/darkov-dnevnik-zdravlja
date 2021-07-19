@@ -2,6 +2,8 @@
     <string name="app_name">Darkov kalendar</string>
     <string name="add">Dodaj</string>
     <string name="save">Spremi</string>
+    <string name="update">Ažuriraj</string>
+    <string name="delete">Izbriši</string>
     <string name="submit">Potvrdi</string>
     <string name="cancel">Prekini</string>
     <string name="choose_location">Odaberi lokaciju</string>

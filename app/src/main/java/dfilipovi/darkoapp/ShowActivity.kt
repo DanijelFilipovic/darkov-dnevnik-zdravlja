@@ -1,13 +1,20 @@
 package dfilipovi.darkoapp
 
+import android.content.Intent
 import android.database.Cursor
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.widget.TextView
+import android.widget.Toast
 import dfilipovi.darkoapp.database.WorkContract
 
 class ShowActivity : AppCompatActivity() {
+
+	private var mEntityId: Int = -1;
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
@@ -15,10 +22,35 @@ class ShowActivity : AppCompatActivity() {
 		initialize()
 	}
 
+	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+		val inflater: MenuInflater = this.menuInflater
+		inflater.inflate(R.menu.show_menu, menu)
+		return true
+	}
+
+	override fun onOptionsItemSelected(item: MenuItem): Boolean {
+		return when (item.itemId) {
+			R.id.task_update -> {
+				return true
+			}
+			R.id.task_delete -> {
+				val numberOfRowsAffected = deleteEntity()
+				if (numberOfRowsAffected > 0) {
+					Toast.makeText(this, "Izbrisano", Toast.LENGTH_SHORT).show()
+					finish()
+				}
+				else
+					Toast.makeText(this, "Došlo je do greške. Brisanje nije provedeno.", Toast.LENGTH_SHORT).show()
+				true
+			}
+			else -> super.onOptionsItemSelected(item)
+		}
+	}
+
 	private fun initialize() {
-		val id = this.intent.extras?.get("id") as Int
-		if (id != null) {
-			queryForEntity(id)?.use {
+		this.mEntityId = this.intent.extras?.get("id") as Int
+		if (this.mEntityId != -1) {
+			queryForEntity(this.mEntityId)?.use {
 				it.moveToNext()
 				findViewById<TextView>(R.id.show_location).text         = it.getString(it.getColumnIndex(WorkContract.WorkEntry.ATTR_LOCATION))
 				findViewById<TextView>(R.id.show_date).text             = it.getString(it.getColumnIndex(WorkContract.WorkEntry.ATTR_DATE))
@@ -56,4 +88,11 @@ class ShowActivity : AppCompatActivity() {
 		return cursor
 	}
 
+	private fun deleteEntity(): Int {
+		val dbHelper = WorkContract.WorkDatabaseHelper(this)
+		val database = dbHelper.writableDatabase
+		val whereClause = "${BaseColumns._ID} = ?"
+		val whereArgs = arrayOf("${this.mEntityId}")
+		return database.delete(WorkContract.WorkEntry.ENTITY_NAME, whereClause, whereArgs)
+	}
 }
