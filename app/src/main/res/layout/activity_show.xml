@@ -15,204 +15,93 @@
             android:layout_marginEnd="15dp" android:layout_marginStart="15dp" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="15dp">
 
-        <!--Datum i vremena početka i završetka-->
+        <!--Težina-->
         <TextView
-                android:text="@string/label_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_date"
+            android:text="@string/label_weight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_weight"
         />
         <EditText android:textSize="18sp"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:inputType="date"
-                  android:ems="10"
-                  android:hint="@string/label_date"
-                  android:id="@+id/show_date"
-                  android:clickable="true"
-                  android:focusable="false"
-                  android:cursorVisible="false"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="number"
+            android:ems="10"
+            android:hint="@string/label_weight"
+            android:id="@+id/input_weight"
         />
 
         <!--Odvajač-->
         <View
-                android:id="@+id/divider_1"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
+            android:id="@+id/divider_1"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
         />
 
-        <!--Lokacija-->
+        <!--Šećer-->
         <TextView
-                android:text="@string/label_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_location"
+            android:text="@string/label_sugar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_sugar"
         />
         <EditText android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/label_location"
-                android:ems="10"
-                android:id="@+id/show_location"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:hint="@string/label_sugar"
+            android:id="@+id/input_sugar"
         />
 
         <!--Odvajač-->
         <View
-                android:id="@+id/divider_2"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
+            android:id="@+id/divider_2"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
         />
 
-        <!--Vrijeme početka i završetka-->
+        <!--Tlak-->
         <TextView
-                android:text="@string/label_time"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_time"
+            android:text="@string/label_blood_pressure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/label_blood_pressure"
         />
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+        <GridLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="7"
         >
             <EditText android:textSize="18sp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:inputType="none"
-                    android:ems="10"
-                    android:hint="@string/label_time_start"
-                    android:id="@+id/show_time_start"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:cursorVisible="false"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:inputType="number"
+                android:ems="10"
+                android:hint="@string/label_blood_pressure_1"
+                android:id="@+id/input_blood_pressure_1"
             />
             <EditText android:textSize="18sp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:inputType="none"
-                    android:ems="10"
-                    android:hint="@string/label_time_end"
-                    android:id="@+id/show_time_end"
-                    android:clickable="true"
-                    android:focusable="false"
-                    android:cursorVisible="false"
-            />
-        </LinearLayout>
-
-        <!--Odvajač-->
-        <View
-                android:id="@+id/divider_3"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-        />
-
-        <!--Vozilo-->
-        <TextView
-                android:text="@string/label_vehicle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_vehicle"
-        />
-        <EditText android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/label_vehicle"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:inputType="number"
                 android:ems="10"
-                android:id="@+id/show_vehicle"
-        />
-
-        <!--Odvajač-->
-        <View
-                android:id="@+id/divider_4"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-        />
-
-        <!--Početna i završna kilometraža-->
-        <TextView
-                android:text="@string/label_kilometers"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_kilometers"
-        />
-        <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-        >
-            <EditText android:textSize="18sp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:hint="@string/label_kilometers_start"
-                    android:id="@+id/show_kilometers_start"
-            />
-            <TextView android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text=" — "
+                android:hint="@string/label_blood_pressure_2"
+                android:id="@+id/input_blood_pressure_2"
             />
             <EditText android:textSize="18sp"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight=".5"
-                    android:inputType="number"
-                    android:ems="10"
-                    android:hint="@string/label_kilometers_end"
-                    android:id="@+id/show_kilometers_end"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_columnWeight="1"
+                android:inputType="number"
+                android:ems="10"
+                android:hint="@string/label_blood_pressure_3"
+                android:id="@+id/input_blood_pressure_3"
             />
-        </LinearLayout>
-
-        <!--Odvajač-->
-        <View
-                android:id="@+id/divider_5"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-        />
-
-        <!--Vrsta radova-->
-        <TextView
-                android:text="@string/label_work_type"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_work_type"
-        />
-        <EditText android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/label_work_type"
-                android:ems="10"
-                android:id="@+id/show_work_type"
-        />
-
-        <!--Odvajač-->
-        <View
-                android:id="@+id/divider_6"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-        />
-
-        <!--Vrsta radova-->
-        <TextView
-                android:text="@string/label_work_order"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/label_work_order"
-        />
-        <EditText android:textSize="18sp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:hint="@string/label_work_order"
-                android:ems="10"
-                android:id="@+id/show_work_order"
-        />
+        </GridLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

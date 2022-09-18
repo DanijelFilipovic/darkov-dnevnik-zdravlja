@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">Darkov kalendar</string>
+    <string name="app_name">Darkov dnevnik zdravlja</string>
     <string name="add">Dodaj</string>
     <string name="save">Spremi</string>
     <string name="update">Ažuriraj</string>
     <string name="delete">Izbriši</string>
     <string name="submit">Potvrdi</string>
     <string name="cancel">Prekini</string>
-    <string name="choose_location">Odaberi lokaciju</string>
 
     <string name="calendar_monday">Pon</string>
     <string name="calendar_tuesday">Uto</string>
@@ -16,22 +15,10 @@
     <string name="calendar_saturday">Sub</string>
     <string name="calendar_sunday">Ned</string>
 
-    <string name="label_location">Lokacija</string>
-    <string name="label_date">Datum</string>
-    <string name="label_time">Vrijeme</string>
-    <string name="label_time_start">Početka</string>
-    <string name="label_time_end">Završetka</string>
-    <string name="label_vehicle">Vozilo</string>
-    <string name="label_kilometers">Kilometraža</string>
-    <string name="label_kilometers_start">Početna</string>
-    <string name="label_kilometers_end">Završna</string>
-    <string name="label_work_type">Vrsta radova</string>
-    <string name="label_work_order">Radni nalog</string>
-
-    <string name="timepicker_title_start">Vrijeme početka</string>
-    <string name="timepicker_title_end">Vrijeme završetka</string>
-
-    <string name="error_incomplete_fields_title">Nepotpuni podaci</string>
-    <string name="error_incomplete_fields_message">Nisu ispunjena sva polja</string>
-
+    <string name="label_weight">Težina</string>
+    <string name="label_sugar">Šećer</string>
+    <string name="label_blood_pressure">Tlak</string>
+    <string name="label_blood_pressure_1">Tlak 1</string>
+    <string name="label_blood_pressure_2">Tlak 2</string>
+    <string name="label_blood_pressure_3">Tlak 3</string>
 </resources>
