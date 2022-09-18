@@ -26,7 +26,7 @@ object HealthContract {
 
 	private const val SQL_DROP = "DROP TABLE IF EXISTS ${HealthEntry.ENTITY_NAME}"
 
-	class WorkDatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+	class HealthDatabaseHelper(context: Context?) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
 		companion object {
 			const val DATABASE_NAME    = "DarkoHealthApp"
