@@ -1,5 +1,6 @@
 package dfilipovi.darkoapp
 
+import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.os.Bundle
 import android.view.Menu
@@ -9,12 +10,18 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dfilipovi.darkoapp.database.HealthContract
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class AddActivity : AppCompatActivity() {
+
+	private val dateFormatter: DateFormat = SimpleDateFormat("dd.MM.yyyy.")
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		setContentView(R.layout.activity_add)
+		initializeDatePicker()
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -57,6 +64,26 @@ class AddActivity : AppCompatActivity() {
 			finish()
 		} else {
 			Toast.makeText(this, "Greška u spremanju.", Toast.LENGTH_SHORT).show()
+		}
+	}
+
+	private fun initializeDatePicker() {
+		val txtDate: EditText = findViewById(R.id.input_date)
+		txtDate.setOnClickListener {
+			val text: String = txtDate.text.toString()
+			val calendar: Calendar = Calendar.getInstance()
+			if (!text.isBlank()) {
+				val parsedDate = dateFormatter.parse(text)
+				calendar.timeInMillis = parsedDate.time
+			}
+
+			DatePickerDialog(
+				this,
+				{ _, year, month, dayOfMonth -> txtDate.setText("%02d.%02d.%02d.".format(dayOfMonth, month + 1, year)) },
+				calendar[Calendar.YEAR],
+				calendar[Calendar.MONTH],
+				calendar[Calendar.DAY_OF_MONTH]
+			).show()
 		}
 	}
 
