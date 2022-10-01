@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import dfilipovi.darkoapp.R
 import dfilipovi.darkoapp.ShowActivity
@@ -124,7 +125,7 @@ class MonthFragment : Fragment() {
 		val date = cursor.getString(cursor.getColumnIndex(HealthContract.HealthEntry.ATTR_DATE))
 		val layout = mBufferDaysInMonth[date]
 		if (layout != null) {
-			layout.setBackgroundColor(Color.GREEN)
+			layout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.purple_200));
 
 			layout.setOnClickListener {
 				val dbHelper = HealthContract.HealthDatabaseHelper(activity)
