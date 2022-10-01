@@ -1,5 +1,6 @@
 package dfilipovi.darkoapp
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.ContentValues
 import android.os.Bundle
@@ -7,6 +8,8 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import dfilipovi.darkoapp.database.HealthContract
@@ -42,30 +45,35 @@ class AddActivity : AppCompatActivity() {
 
 	private fun save() {
 		val date: String = findViewById<EditText>(R.id.input_date).text.toString()
-		val weight: String = findViewById<EditText>(R.id.input_weight).text.toString()
-		val sugar: String = findViewById<EditText>(R.id.input_sugar).text.toString()
-		val bloodPressure1: String = findViewById<EditText>(R.id.input_blood_pressure_1).text.toString()
-		val bloodPressure2: String = findViewById<EditText>(R.id.input_blood_pressure_2).text.toString()
-		val bloodPressure3: String = findViewById<EditText>(R.id.input_blood_pressure_3).text.toString()
 
-		val dbHelper = HealthContract.HealthDatabaseHelper(this)
-		val db = dbHelper.writableDatabase
-
-		val values = ContentValues().apply {
-			put(HealthContract.HealthEntry.ATTR_DATE, date)
-			put(HealthContract.HealthEntry.ATTR_WEIGHT, weight)
-			put(HealthContract.HealthEntry.ATTR_SUGAR, sugar)
-			put(HealthContract.HealthEntry.ATTR_BLOOD_PRESSURE_1, bloodPressure1)
-			put(HealthContract.HealthEntry.ATTR_BLOOD_PRESSURE_2, bloodPressure2)
-			put(HealthContract.HealthEntry.ATTR_BLOOD_PRESSURE_3, bloodPressure3)
-		}
-
-		val id: Long? = db?.insert(HealthContract.HealthEntry.ENTITY_NAME, null, values)
-		if (id != null && !id.equals(-1)) {
-			Toast.makeText(this, "Uspješno spremljeno.", Toast.LENGTH_SHORT).show()
-			finish()
+		if (date.isEmpty()) {
+			showMissingDateDialog()
 		} else {
-			Toast.makeText(this, "Greška u spremanju.", Toast.LENGTH_SHORT).show()
+			val weight: String = findViewById<EditText>(R.id.input_weight).text.toString()
+			val sugar: String = findViewById<EditText>(R.id.input_sugar).text.toString()
+			val bloodPressure1: String = findViewById<EditText>(R.id.input_blood_pressure_1).text.toString()
+			val bloodPressure2: String = findViewById<EditText>(R.id.input_blood_pressure_2).text.toString()
+			val bloodPressure3: String = findViewById<EditText>(R.id.input_blood_pressure_3).text.toString()
+
+			val dbHelper = HealthContract.HealthDatabaseHelper(this)
+			val db = dbHelper.writableDatabase
+
+			val values = ContentValues().apply {
+				put(HealthContract.HealthEntry.ATTR_DATE, date)
+				put(HealthContract.HealthEntry.ATTR_WEIGHT, weight)
+				put(HealthContract.HealthEntry.ATTR_SUGAR, sugar)
+				put(HealthContract.HealthEntry.ATTR_BLOOD_PRESSURE_1, bloodPressure1)
+				put(HealthContract.HealthEntry.ATTR_BLOOD_PRESSURE_2, bloodPressure2)
+				put(HealthContract.HealthEntry.ATTR_BLOOD_PRESSURE_3, bloodPressure3)
+			}
+
+			val id: Long? = db?.insert(HealthContract.HealthEntry.ENTITY_NAME, null, values)
+			if (id != null && !id.equals(-1)) {
+				Toast.makeText(this, "Uspješno spremljeno.", Toast.LENGTH_SHORT).show()
+				finish()
+			} else {
+				Toast.makeText(this, "Greška u spremanju.", Toast.LENGTH_SHORT).show()
+			}
 		}
 	}
 
@@ -87,6 +95,25 @@ class AddActivity : AppCompatActivity() {
 				calendar[Calendar.DAY_OF_MONTH]
 			).show()
 		}
+	}
+
+	private fun showMissingDateDialog() {
+		val messageView: LinearLayout = LinearLayout(this)
+		messageView.orientation = LinearLayout.VERTICAL
+		messageView.setPadding(73, 24, 73, 24)
+
+		val tvMessage = TextView(this)
+		tvMessage.text = getString(R.string.error_missing_date_message)
+		tvMessage.setTextColor(getColor(R.color.black))
+		tvMessage.setPadding(0, 0, 0, 5)
+		messageView.addView(tvMessage)
+
+		AlertDialog.Builder(this)
+			.setTitle(getString(R.string.error_missing_date_title))
+			.setView(messageView)
+			.setPositiveButton("OK", null)
+			.create()
+			.show()
 	}
 
 }

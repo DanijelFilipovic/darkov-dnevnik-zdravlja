@@ -22,4 +22,7 @@
     <string name="label_blood_pressure_1">Tlak 1</string>
     <string name="label_blood_pressure_2">Tlak 2</string>
     <string name="label_blood_pressure_3">Tlak 3</string>
+
+    <string name="error_missing_date_title">Nedostaje datum</string>
+    <string name="error_missing_date_message">Trebate unijeti datum da biste spremili podatke!</string>
 </resources>
