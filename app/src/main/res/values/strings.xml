@@ -15,6 +15,7 @@
     <string name="calendar_saturday">Sub</string>
     <string name="calendar_sunday">Ned</string>
 
+    <string name="label_date">Datum</string>
     <string name="label_weight">Težina</string>
     <string name="label_sugar">Šećer</string>
     <string name="label_blood_pressure">Tlak</string>

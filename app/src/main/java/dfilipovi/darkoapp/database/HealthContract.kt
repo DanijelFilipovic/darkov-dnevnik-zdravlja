@@ -9,6 +9,7 @@ object HealthContract {
 
 	object HealthEntry : BaseColumns {
 		const val ENTITY_NAME           = "health"
+		const val ATTR_DATE             = "date"
 		const val ATTR_WEIGHT           = "weight"
 		const val ATTR_SUGAR            = "sugar"
 		const val ATTR_BLOOD_PRESSURE_1 = "blood_pressure_1"
@@ -18,6 +19,7 @@ object HealthContract {
 
 	private const val SQL_CREATE = "CREATE TABLE ${HealthEntry.ENTITY_NAME} (" +
 		"${BaseColumns._ID} INTEGER PRIMARY KEY," +
+		"${HealthEntry.ATTR_DATE} TEXT," +
 		"${HealthEntry.ATTR_WEIGHT} REAL," +
 		"${HealthEntry.ATTR_SUGAR} INTEGER," +
 		"${HealthEntry.ATTR_BLOOD_PRESSURE_1} INTEGER," +
