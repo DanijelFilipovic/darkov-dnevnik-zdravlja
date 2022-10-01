@@ -78,8 +78,8 @@ class MonthFragment : Fragment() {
 			val today = Calendar.getInstance()
 			val todayString = "%02d.%02d.%04d.".format(today[Calendar.DAY_OF_MONTH], today[Calendar.MONTH] + 1, today[Calendar.YEAR])
 			for (i in 1..42) {
-				val id: Int = resources.getIdentifier("calendar_day_%d".format(i), "id", activity!!.packageName)
-				val layout: LinearLayout = view!!.findViewById(id)
+				val id: Int = resources.getIdentifier("calendar_day_%d".format(i), "id", requireActivity().packageName)
+				val layout: LinearLayout = requireView().findViewById(id)
 
 				if (i >= firstDay && i <= lastDay) {
 					val dateString: String = "%02d.%02d.%04d.".format(i - offset, calendar[Calendar.MONTH] + 1, calendar[Calendar.YEAR])
