@@ -9,10 +9,9 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.commit
-import dfilipovi.darkoapp.database.WorkContract
+import dfilipovi.darkoapp.database.HealthContract
 import dfilipovi.darkoapp.fragment.MonthFragment
 import dfilipovi.darkoapp.listener.OnSwipeListener
 import java.util.*
@@ -32,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
 	override fun onDestroy() {
 		super.onDestroy()
-		WorkContract.WorkDatabaseHelper(this).close()
+		HealthContract.HealthDatabaseHelper(this).close()
 	}
 
 	override fun onCreateOptionsMenu(menu: Menu?): Boolean {
