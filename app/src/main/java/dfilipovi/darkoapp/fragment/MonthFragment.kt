@@ -5,19 +5,15 @@ import android.database.Cursor
 import android.graphics.Color
 import android.os.Bundle
 import android.provider.BaseColumns
-import android.text.TextUtils
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import dfilipovi.darkoapp.MainActivity
 import dfilipovi.darkoapp.R
 import dfilipovi.darkoapp.ShowActivity
-import dfilipovi.darkoapp.database.WorkContract
+import dfilipovi.darkoapp.database.HealthContract
 import java.util.*
 
 private const val PARAM_MILLISECONDS = "milliseconds"
@@ -115,70 +111,37 @@ class MonthFragment : Fragment() {
 		val startOfTheMonth = "%d-%02d-01".format(mCalendar[Calendar.YEAR], mCalendar[Calendar.MONTH] + 1)
 		val endOfTheMonth = "%d-%02d-%02d".format(mCalendar[Calendar.YEAR], mCalendar[Calendar.MONTH] + 1, mCalendar.getActualMaximum(Calendar.DAY_OF_MONTH))
 
-		val dbHelper = WorkContract.WorkDatabaseHelper(activity)
+		val dbHelper = HealthContract.HealthDatabaseHelper(activity);
 		val database = dbHelper.readableDatabase
-		val projection = arrayOf(
-			BaseColumns._ID,
-			WorkContract.WorkEntry.ATTR_LOCATION,
-			WorkContract.WorkEntry.ATTR_DATE
-		)
+		val projection = arrayOf(BaseColumns._ID, HealthContract.HealthEntry.ATTR_DATE)
 		val selection = "(SUBSTR(date, 7, 4) || '-' || SUBSTR(date, 4, 2) || '-' || SUBSTR(date, 1, 2)) BETWEEN ? AND ?"
 		val selectionArgs = arrayOf(startOfTheMonth, endOfTheMonth)
 
-		return database.query(WorkContract.WorkEntry.ENTITY_NAME, projection, selection, selectionArgs, null, null, null)
+		return database.query(HealthContract.HealthEntry.ENTITY_NAME, projection, selection, selectionArgs, null, null, null)
 	}
 
 	private fun insertIntoCalendar(cursor: Cursor) {
-		val date = cursor.getString(cursor.getColumnIndex(WorkContract.WorkEntry.ATTR_DATE))
+		val date = cursor.getString(cursor.getColumnIndex(HealthContract.HealthEntry.ATTR_DATE))
 		val layout = mBufferDaysInMonth[date]
-		if (layout != null && layout.childCount <= 4) {
-			val tvEntity = TextView(activity)
-			tvEntity.textAlignment = TextView.TEXT_ALIGNMENT_TEXT_START
-			tvEntity.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11f)
-			tvEntity.maxLines = 1
-			tvEntity.ellipsize = TextUtils.TruncateAt.END
-			tvEntity.text = if (layout.childCount < 4) cursor.getString(cursor.getColumnIndex(WorkContract.WorkEntry.ATTR_LOCATION)) else "..."
-			layout.addView(tvEntity)
+		if (layout != null) {
+			layout.setBackgroundColor(Color.GREEN)
 
 			layout.setOnClickListener {
-				val dbHelper = WorkContract.WorkDatabaseHelper(activity)
+				val dbHelper = HealthContract.HealthDatabaseHelper(activity)
 				val database = dbHelper.readableDatabase
-				val projection = arrayOf(BaseColumns._ID, WorkContract.WorkEntry.ATTR_LOCATION)
+				val projection = arrayOf(BaseColumns._ID)
 				val selection = "date = ?"
 				val selectionArgs = arrayOf(date)
 
-				val cursor = database.query(WorkContract.WorkEntry.ENTITY_NAME, projection, selection, selectionArgs, null, null, null)
-				if (cursor.count > 1) {
-					val ids = ArrayList<Int>()
-					val locations = ArrayList<String>()
-
-					cursor.use {
-						while (it.moveToNext()) {
-							ids.add(it.getInt(it.getColumnIndex(BaseColumns._ID)))
-							locations.add(it.getString(it.getColumnIndex(WorkContract.WorkEntry.ATTR_LOCATION)))
-						}
-					}
-
-					AlertDialog.Builder(activity as MainActivity)
-						.setTitle(getString(R.string.choose_location))
-						.setItems(locations.toTypedArray()) { _, which ->
-							val intent = Intent(activity, ShowActivity::class.java)
-							intent.putExtra("id", ids[which])
-							startActivity(intent)
-						}
-						.setNegativeButton(getString(R.string.cancel), null)
-						.create()
-						.show()
-				} else {
-					var id: Int? = null
-					cursor.use {
-						it.moveToNext()
-						id = it.getInt(it.getColumnIndex(BaseColumns._ID))
-					}
-					val intent = Intent(activity, ShowActivity::class.java)
-					intent.putExtra("id", id)
-					startActivity(intent)
+				val cursor = database.query(HealthContract.HealthEntry.ENTITY_NAME, projection, selection, selectionArgs, null, null, null)
+				var id: Int? = null
+				cursor.use {
+					it.moveToNext()
+					id = it.getInt(it.getColumnIndex(BaseColumns._ID))
 				}
+				val intent = Intent(activity, ShowActivity::class.java)
+				intent.putExtra("id", id)
+				startActivity(intent)
 			}
 		}
 	}
