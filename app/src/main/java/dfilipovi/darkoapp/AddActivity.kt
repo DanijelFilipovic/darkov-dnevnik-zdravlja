@@ -41,6 +41,7 @@ class AddActivity : AppCompatActivity() {
 	}
 
 	private fun save() {
+		val date: String = findViewById<EditText>(R.id.input_date).text.toString()
 		val weight: String = findViewById<EditText>(R.id.input_weight).text.toString()
 		val sugar: String = findViewById<EditText>(R.id.input_sugar).text.toString()
 		val bloodPressure1: String = findViewById<EditText>(R.id.input_blood_pressure_1).text.toString()
@@ -51,6 +52,7 @@ class AddActivity : AppCompatActivity() {
 		val db = dbHelper.writableDatabase
 
 		val values = ContentValues().apply {
+			put(HealthContract.HealthEntry.ATTR_DATE, date)
 			put(HealthContract.HealthEntry.ATTR_WEIGHT, weight)
 			put(HealthContract.HealthEntry.ATTR_SUGAR, sugar)
 			put(HealthContract.HealthEntry.ATTR_BLOOD_PRESSURE_1, bloodPressure1)
