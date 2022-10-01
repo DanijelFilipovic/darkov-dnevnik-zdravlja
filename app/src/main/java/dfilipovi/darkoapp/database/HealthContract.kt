@@ -19,7 +19,7 @@ object HealthContract {
 
 	private const val SQL_CREATE = "CREATE TABLE ${HealthEntry.ENTITY_NAME} (" +
 		"${BaseColumns._ID} INTEGER PRIMARY KEY," +
-		"${HealthEntry.ATTR_DATE} TEXT," +
+		"${HealthEntry.ATTR_DATE} TEXT UNIQUE," +
 		"${HealthEntry.ATTR_WEIGHT} REAL," +
 		"${HealthEntry.ATTR_SUGAR} INTEGER," +
 		"${HealthEntry.ATTR_BLOOD_PRESSURE_1} INTEGER," +
