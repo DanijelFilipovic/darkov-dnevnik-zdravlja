@@ -101,9 +101,8 @@ class MonthFragment : Fragment() {
 		for (key in mBufferDaysInMonth.keys) {
 			val layout = mBufferDaysInMonth[key]
 			if (layout != null) {
-				while (layout.childCount > 1) {
-					layout.removeViewAt(1)
-				}
+				layout.setBackgroundColor(0)
+				layout.setOnClickListener(null)
 			}
 		}
 	}
@@ -112,7 +111,7 @@ class MonthFragment : Fragment() {
 		val startOfTheMonth = "%d-%02d-01".format(mCalendar[Calendar.YEAR], mCalendar[Calendar.MONTH] + 1)
 		val endOfTheMonth = "%d-%02d-%02d".format(mCalendar[Calendar.YEAR], mCalendar[Calendar.MONTH] + 1, mCalendar.getActualMaximum(Calendar.DAY_OF_MONTH))
 
-		val dbHelper = HealthContract.HealthDatabaseHelper(activity);
+		val dbHelper = HealthContract.HealthDatabaseHelper(activity)
 		val database = dbHelper.readableDatabase
 		val projection = arrayOf(BaseColumns._ID, HealthContract.HealthEntry.ATTR_DATE)
 		val selection = "(SUBSTR(date, 7, 4) || '-' || SUBSTR(date, 4, 2) || '-' || SUBSTR(date, 1, 2)) BETWEEN ? AND ?"
@@ -125,7 +124,7 @@ class MonthFragment : Fragment() {
 		val date = cursor.getString(cursor.getColumnIndex(HealthContract.HealthEntry.ATTR_DATE))
 		val layout = mBufferDaysInMonth[date]
 		if (layout != null) {
-			layout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.purple_200));
+			layout.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.purple_200))
 
 			layout.setOnClickListener {
 				val dbHelper = HealthContract.HealthDatabaseHelper(activity)
